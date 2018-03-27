@@ -1,0 +1,69 @@
+﻿@model Models.EF.LoaiMatHang
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section header{
+    <li><a href="#">Quản trị kho</a></li>
+    <li class="active"><a href="#">Thêm mới chủng loại</a></li>
+}
+@section jsFooter{
+<script>
+    $('#AlertBox').removeClass('hide');
+    $('#AlertBox').delay(1000).slideUp(500);
+</script>
+}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Thông tin về chủng loại
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        @if (TempData["AlerMessage"] == null)
+        {
+            <div class="row">
+                <div class="form-group">
+                    <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                        <h4>@TempData["AlertMessage"]</h4>
+                    </div>
+                </div>
+            </div>
+        }
+        
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label class="control-label col-md-2">Mã chủng loại:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Tên chủng loại:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Thêm mới" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Trở về", "Index")
+        </div>
+    </div>
+</div>

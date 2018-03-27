@@ -1,0 +1,181 @@
+﻿@model Models.EF.HangHoa
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section header{
+    <li><a href="#">Quản trị kho</a></li>
+    <li class="active"><a href="#">Thêm mới hàng hóa</a></li>
+}
+@section jsFooter{
+    <script>
+        $('#TonToiThieu, #TonToiDa,#GiaNhapVe,#GiaBanLe,#GiaBanSi').keyup(function (event) {
+            if (event.which >= 37 && event.which <= 40) return;
+            this.value = this.value.replace(/\D/g, '')
+                                   .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        });
+        $('#TonToiThieu').val(0);
+        $('#TonToiDa').val(0);
+        $('#GiaNhapVe').val(0);
+        $('#GiaBanLe').val(0);
+        $('#GiaBanSi').val(0);
+        $('#ThueSuat').val(10);
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#txtImage').val(url);
+            };
+            finder.popup();
+        });
+
+        $('#btnSubmit').click(function () {
+            $("#TonToiThieu").val($("#TonToiThieu").val().replace(/,/g, ''));
+            $("#TonToiDa").val($("#TonToiDa").val().replace(/,/g, ''));
+            $("#GiaNhapVe").val($("#GiaNhapVe").val().replace(/,/g, ''));
+            $("#GiaBanLe").val($("#GiaBanLe").val().replace(/,/g, ''));
+            $("#GiaBanSi").val($("#GiaBanSi").val().replace(/,/g, ''));
+        });
+
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(1000).slideUp(500);
+    </script>
+}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Thông tin hàng hóa
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        @if (TempData["AlerMessage"] == null)
+        {
+            <div class="row">
+                <div class="form-group">
+                    <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                        <h4>@TempData["AlertMessage"]</h4>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @using (Html.BeginForm("Create", "HangHoa", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label class="control-label col-md-2">Tên hàng hóa:</label>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.TenHH, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TenHH, "", new { @class = "text-danger" })
+                    </div>
+                    <label class="control-label col-md-2">Chủng loại:</label>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.LoaiMH, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.LoaiMH, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Nước sản xuất:</label>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.NuocSXID, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NuocSXID, "", new { @class = "text-danger" })
+                    </div>
+                    <label class="control-label col-md-2">Đơn vị tính:</label>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.DVT, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DVT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Màu sắc:</label>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.MauID, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MauID, "", new { @class = "text-danger" })
+                    </div>
+                    <label class="control-label col-md-2">Giá nhập về(VND):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.GiaNhapVe, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.GiaNhapVe, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">SL Tồn tối thiểu:</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.TonToiThieu, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TonToiThieu, "", new { @class = "text-danger" })
+                    </div>
+                    <label class="control-label col-md-2">SL tồn tối đa:</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.TonToiDa, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TonToiDa, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Giá bán lẻ(VND):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.GiaBanLe, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.GiaBanLe, "", new { @class = "text-danger" })
+                    </div>
+                    <label class="control-label col-md-2">Giá bán sĩ(VND):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.GiaBanSi, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.GiaBanSi, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Thuế suất (%):</label>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.ThueSuat, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ThueSuat, "", new { @class = "text-danger" })
+                    </div>
+                    <label class="control-label col-md-2">Ghi chú:</label>
+                    <div class="col-md-4">
+                        @Html.TextAreaFor(model => model.ThongTin, new { @class = "form-control", @row = 3 })
+                        @Html.ValidationMessageFor(model => model.ThongTin, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Ảnh minh họa:</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Anh, new { id = "txtImage", @class = "form-control" })
+                        <a href="#" class="btn btn-info" id="btnSelectImage">Chọn ảnh</a>
+                        @Html.ValidationMessageFor(model => model.Anh, "", new { @class = "text-danger" })
+                    </div>
+                    <label class="control-label col-md-2">Cho phép tồn kho?</label>
+                    <div class="col-md-4">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(model => model.TinhTonKho, new { @checked = "checked" })
+                            @Html.ValidationMessageFor(model => model.TinhTonKho, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-4">
+                        <input type="submit" id="btnSubmit" value="Tạo mới" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Trở về", "Index")
+        </div>
+    </div>
+    <!-- /.panel-body -->
+</div>

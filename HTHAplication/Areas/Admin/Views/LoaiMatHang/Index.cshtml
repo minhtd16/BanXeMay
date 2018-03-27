@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Models.EF.LoaiMatHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section header{
+    <li><a href="#">Quản trị kho</a></li>
+    <li class="active"><a href="#">Loại mặt hàng</a></li>
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<div id="wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Danh sách chủng loại hàng hóa
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <p>
+                        <a href="@Url.Action("Create", "LoaiMatHang")" class="btn btn-success">Thêm mới</a>
+                    </p>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Tên
+                            </th>                           
+                            <th>Hành động</th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr id="row_@item.ID">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Ten)
+                                </td>                               
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class="btn btn-info"}) |
+                                    @Ajax.ActionLink("Xoá", "Delete", new { @id = item.ID }, new AjaxOptions
+                                        {
+                                            Confirm = "Bạn có muốn xoá bản ghi này?",
+                                            OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                            HttpMethod = "Delete"
+                                        }, new { @class = "btn btn-danger" })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

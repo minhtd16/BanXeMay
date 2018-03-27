@@ -1,0 +1,61 @@
+﻿@model Models.EF.LoaiMatHang
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section header{
+    <li><a href="#">Quản trị kho</a></li>
+    <li class="active"><a href="#">Loại mặt hàng</a></li>
+}
+<div id="wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Cập nhật thông tin cho mã chủng loại:@((Model.ID != null) ? @Model.ID : "")
+                </div>
+                @if (TempData["AlerMessage"] == null)
+                {
+                    <div class="row">
+                        <div class="form-group">
+                            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                                <h4>@TempData["AlertMessage"]</h4>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.ID)
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Tên chủng loại:</label>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Save" class="btn btn-success" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div>
+                        @Html.ActionLink("Trở về", "Index")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

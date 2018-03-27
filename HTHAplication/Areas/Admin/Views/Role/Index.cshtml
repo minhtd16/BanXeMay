@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section header{
+    <li><a href="#">Quản trị quyền</a></li>
+    <li class="active"><a href="~/Admin/Role">Danh sách quyền</a></li>
+}
+<link href="~/Content/themes/redmond/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui-1.10.0.js"></script>
+<script src="~/Scripts/i18n/grid.locale-en.js"></script>
+<script src="~/Scripts/jquery.jqGrid.min.js"></script>
+
+<script>
+    $(function () {
+        debugger;
+        $("#grid").jqGrid
+        ({
+            url: '@Url.Action("GetRoles", "Role")',
+            datatype: 'json',
+            mtype: 'Get',
+            //table header name
+            colNames: ['ID', 'Name'],
+            //colModel takes the data from controller and binds to grid
+            colModel: [
+            { name: "ID", editable: true, key: true, editrules: { required: true }, search: true, searchoptions: { sopt: ["cn"] } },
+            { name: "Name", editable: true, editrules: { required: true }, search: true, searchoptions: { sopt: ["cn"] } }
+            ],
+            height: '100%',
+            viewrecords: true,
+            caption: 'Danh sách các quyền',
+            emptyrecords: 'No records',
+            rowNum: 10,
+
+            pager: jQuery('#pager'),
+            rowList: [10, 20, 30, 40],
+
+            jsonReader:
+            {
+                root: "rows",
+                page: "page",
+                total: "total",
+                records: "records",
+                repeatitems: false,
+                Id: "0"
+            },
+            autowidth: true,
+        }).navGrid('#pager', {
+            edit: true,
+            add: true,
+            del: true,
+            search: true,
+            refresh: true,
+            closeAfterSearch: true
+        },
+        {
+            // edit option
+            zIndex: 100,
+            url: '@Url.Action("Edit","Role")',
+            closeOnEscape: true,
+            closeAfterEdit: true,
+            recreateForm: true,
+            afterComplete: function (response) {
+                if (response.responseText) {
+                    alert(response.responseText);
+
+                }
+            }
+        },
+        {
+            // add option
+            zIndex: 100,
+            url: '@Url.Action("Create","Role")',
+            closeOnEscape: true,
+            closeAfterAdd: true,
+            afterComplete: function (response) {
+
+                if (response.responseJSON) {
+                    if (response.responseJSON == "Saved Successfully!") {
+                        alert("Thêm mới thành công!");
+
+                    }
+                    else {
+                        //var message = "";
+                        //for (var i = 0; i < response.responseJSON.length; i++) {
+                        //    message += response.responseJSON[i];
+                        //    message += "\n";
+                        //}
+                        alert(response.responseJSON);
+
+                    }
+
+                }
+            }
+        },
+        {
+            // delete option
+            zIndex: 100,
+            url: '@Url.Action("Delete","Role")',
+            closeOnEscape: true,
+            closeAfterDelete: true,
+            recreateForm: true,
+            msg: "Are you sure you want to delete this record?",
+            afterComplete: function (response) {
+                if (response.responseText) {
+                    alert(response.responseText);
+
+                }
+            }
+        }
+        );
+
+    });
+</script>
+<table id="grid"></table>
+<div id="pager"></div>  

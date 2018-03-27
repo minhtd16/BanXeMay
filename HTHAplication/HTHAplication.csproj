@@ -2396,7 +2396,6 @@
     <Content Include="Areas\Admin\Views\KhachHang\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\LoaiKhachHang\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin_tm.cshtml" />
-    <Content Include="Areas\Admin\Views\KhachHang\IndexTM.cshtml" />
     <Content Include="Assets\Admin_m\js\plugins\ckeditor\CHANGES.md" />
     <Content Include="Assets\Admin_m\js\plugins\ckeditor\LICENSE.md" />
     <Content Include="Assets\Admin_m\js\plugins\ckeditor\plugins\scayt\LICENSE.md" />

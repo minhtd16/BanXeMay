@@ -2395,7 +2395,6 @@
     <Content Include="Areas\Admin\Views\KhachHang\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\KhachHang\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\LoaiKhachHang\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\KhachHang\Index11111111.cshtml" />
     <Content Include="Areas\Admin\Views\KhachHang\Index2221.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin_tm.cshtml" />
     <Content Include="Areas\Admin\Views\KhachHang\IndexTM.cshtml" />

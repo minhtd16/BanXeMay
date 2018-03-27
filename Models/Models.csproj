@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dao\CauHinhIDDao.cs" />
+    <Compile Include="Dao\ChiTietNhapDao.cs" />
     <Compile Include="Dao\DonViTinhDao.cs" />
     <Compile Include="Dao\GioiTinhDao.cs" />
     <Compile Include="Dao\HangHoaDao.cs" />
@@ -67,6 +68,8 @@
     <Compile Include="Dao\LoaiKhachHangDao.cs" />
     <Compile Include="Dao\LoaiMatHangDao.cs" />
     <Compile Include="Dao\MauSacDao.cs" />
+    <Compile Include="Dao\NhaCungCapDao.cs" />
+    <Compile Include="Dao\NhapHangDao.cs" />
     <Compile Include="Dao\NuocSanXuatDao.cs" />
     <Compile Include="Dao\RoleDao.cs" />
     <Compile Include="Dao\UserDao.cs" />

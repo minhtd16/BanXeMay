@@ -12,7 +12,8 @@ namespace HTHAplication
                         "~/Scripts/jquery-1.10.2.min.js",
                         "~/Assets/Admin/js/bootstrap.min.js",
                         "~/Assets/Admin/js/metisMenu.min.js",
-                        "~/Assets/Admin/js/startmin.js"                        
+                        "~/Assets/Admin/js/startmin.js",
+                         "~/Scripts/HTHJavaScript.js"
                         ));
 
             //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

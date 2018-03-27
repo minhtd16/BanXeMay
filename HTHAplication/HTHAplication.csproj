@@ -179,9 +179,10 @@
     <Compile Include="Areas\Admin\Controllers\LoaiMatHangController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\MauSacController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NhapHangController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
-    <Compile Include="Areas\Admin\Models\CartItem.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
+    <Compile Include="Areas\Admin\Models\NhapKhoView.cs" />
     <Compile Include="Areas\Admin\Models\PasswordModel.cs" />
     <Compile Include="Common\CommonFunction.cs" />
     <Compile Include="Common\HasCredentialAttribute.cs" />
@@ -2428,7 +2429,10 @@
     <Content Include="Assets\Admin_m\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Assets\Admin_m\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Areas\Admin\Views\KhachHang\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NhapHang\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NhapHang\NhapTuNCC.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\HTHJavaScript.js" />
     <Content Include="Scripts\i18n\grid.locale-ar.js" />
     <Content Include="Scripts\i18n\grid.locale-bg.js" />
     <Content Include="Scripts\i18n\grid.locale-bg1251.js" />

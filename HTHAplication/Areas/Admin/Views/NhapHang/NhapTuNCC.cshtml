@@ -14,9 +14,14 @@
     var dao = new NhaCungCapDao();
     List<NhaCungCap> lst_NCC = dao.GetAll();    
 }
-
+<script src="~/Content/themes/redmond/jquery-ui.min.js"></script>
+<link href="~/Content/themes/redmond/jquery-ui.min.css" rel="stylesheet" />
 <script>
-
+    $(document).ready(function () {        
+        $("#datepicker").datepicker({
+            dateFormat:'dd/mm/yy'
+        });
+    });
 </script>
 
 <!-- /.row -->
@@ -32,7 +37,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-2">Ngày giao dịch:</label>
                         <div class="col-md-2">
-                            <input type="text" placeholder="dd/mm/yyyy" class="form-control" title="Ngày giao dịch" value="" />
+                            <input type="text" id="datepicker" class="form-control" title="Ngày giao dịch" value="" />
                         </div>
                         <label class="control-label col-md-2">Nhà cung cấp:</label>
                         <div class="col-md-2">

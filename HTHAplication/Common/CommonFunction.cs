@@ -24,6 +24,10 @@ namespace HTHApplication.Common
             return (str + strTmp + val);
 
         }
+        public static string GenerateMaHang(string id, long? value = 1)
+        {
+            return id + value.ToString();
+        }
                
     }
 }

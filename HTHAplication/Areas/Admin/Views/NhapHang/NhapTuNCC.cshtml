@@ -12,14 +12,38 @@
 }
 @{
     var dao = new NhaCungCapDao();
-    List<NhaCungCap> lst_NCC = dao.GetAll();    
+    List<NhaCungCap> lst_NCC = dao.GetAll();
 }
 <script src="~/Content/themes/redmond/jquery-ui.min.js"></script>
 <link href="~/Content/themes/redmond/jquery-ui.min.css" rel="stylesheet" />
+
 <script>
-    $(document).ready(function () {        
+    $(document).ready(function () {
         $("#datepicker").datepicker({
-            dateFormat:'dd/mm/yy'
+            dateFormat: 'dd/mm/yy'
+        }).datepicker("setDate", new Date());
+        $("#div_ThemHang").dialog({
+            autoOpen: false,
+            height: 500,
+            width: 700,
+            modal: true
+        });
+
+        $('#a_AddValue').click(function () {
+            $('#div_ThemHang').dialog("open");
+        });
+        $('#sl_staff').on('change', function () {
+            if ($(this).val() == "-1") {
+                $('#txt_staffName').val('')
+                $('#txt_Address').val('');
+            }
+            else {
+                var li = $('#ul_staff li:nth-child(' + $(this).val() + ')');
+                var x = li.children('input').eq(0).val();
+                var y = li.children('input').eq(1).val();
+                $('#txt_staffName').val(x);
+                $('#txt_Address').val(y);
+            }
         });
     });
 </script>
@@ -33,15 +57,11 @@
             </div>
             <form>
                 <div class="panel-body">
-
                     <div class="form-group">
-                        <label class="control-label col-md-2">Ngày giao dịch:</label>
-                        <div class="col-md-2">
-                            <input type="text" id="datepicker" class="form-control" title="Ngày giao dịch" value="" />
-                        </div>
                         <label class="control-label col-md-2">Nhà cung cấp:</label>
-                        <div class="col-md-2">
-                            <select name="sl_staff" class="form-control" id="sl_staff" style="width:100%" onchange="return changeNCC(this);" title="Chọn nhà cung cấp">
+                        <div class="col-md-4">
+                            <select name="sl_staff" class="form-control" id="sl_staff" style="width:100%" title="Chọn nhà cung cấp">
+                                <option value="-1"> ----Chọn nhà cung cấp ----</option>
                                 @for (int i = 0; i < lst_NCC.Count(); i++)
                                 {
                                     <option value="@lst_NCC.ElementAt(i).MaNCC">@lst_NCC.ElementAt(i).CongTy</option>
@@ -53,17 +73,74 @@
                             @for (int i = 0; i < lst_NCC.Count(); i++)
                             {
                                 <li>
-                                    <input name="ten" value="@lst_NCC.ElementAt(i).NguoiLienHe" />                                    
+                                    <input name="ten" value="@lst_NCC.ElementAt(i).NguoiLienHe" />
+                                    <input name="diachi" value="@lst_NCC.ElementAt(i).DiaChi" />
                                 </li>
                             }
                         </ul>
                         <!-- End NPE -->
                         <label class="control-label col-md-2">Giám đốc:</label>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <input type="text" name="txt_staffName" id="txt_staffName" disabled="disabled" class="form-control" title="Chủ công ty" value="" />
                         </div>
                     </div>
                     <div class="clearfix"></div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Địa chỉ:</label>
+                        <div class="col-md-10">
+                            <input type="text" id="txt_Address" class="form-control" disabled="disabled" title="Địa chỉ" value="" />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Ngày giao dịch:</label>
+                        <div class="col-md-2">
+                            <input type="text" id="datepicker" class="form-control" title="Ngày giao dịch" value="" />
+                        </div>
+                        <div class="col-md-2"></div>
+                        <label class="control-label col-md-2">Mã chứng từ:</label>
+                        <div class="col-md-4">
+                            <input type="text" id="" disabled="disabled" class="form-control" title="Mã chứng từ" value="@Model.chung_tu_nhap.IDNhap" />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Người giao hàng:</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" title="Người giao hàng" value="" />
+                        </div>
+                        <label class="control-label col-md-2">Người lập hóa đơn:</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" title="Người lập hóa đơn" value="" />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Diễn giải:</label>
+                        <div class="col-md-10">
+                            <textarea name="txt_des" class="form-control" id="txt_des" title="Diễn giải lý do nhập hàng"></textarea>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="form-group">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <a id="a_AddValue" rel="" href="#">
+                                <input type="button" class="btn btn-success" name="btn_AddValue" id="btn_AddValue" value="Thêm hàng" />
+                            </a>
+                            <input type="button" class="btn btn-primary" value="Lưu trữ" />
+                            <a rel="#" href="/Admin/NhapHang/NhapTuNCC">
+                                <input type="button" class="btn btn-info" value="Làm mới" />
+                            </a>
+                            <a rel="#" href="/Admin/Home">
+                                <input type="button" class="btn btn-danger" value="Thoát" />
+                            </a>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                    <div class="clearfix"></div>
+
                     <br />
                     <div class="form-group">
                         <div class="table-responsive">
@@ -112,20 +189,10 @@
                     </div>
                 </div>
                 <!--div panel-body-->
-            </form>
+            </form>            
         </div>
-    </div>
-
+    </div>    
 </div>
-<!-- /.row -->
-@*<div class="form-group input-group">
-        <input type="text" placeholder="Tìm hàng hóa theo mã hoặc tên" class="form-control">
-        <span class="input-group-btn">
-            <button class="btn btn-default" title="Tìm kiếm hàng hóa" type="button">
-                <i class="fa fa-search"></i>
-            </button>
-            <button class="btn btn-default" title="Thêm mới hàng hóa" type="button">
-                <i class="fa fa-plus"></i>
-            </button>
-        </span>
-    </div>*@
+<div id="div_ThemHang" title="Thêm hàng hóa" style="display:none;">
+    @Html.Partial("_Partial_ThemHang")
+</div>

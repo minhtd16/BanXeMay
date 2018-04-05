@@ -26,8 +26,8 @@ namespace Models.EF
         [StringLength(50)]
         public string ThuKho { get; set; }
 
-        [StringLength(50)]
-        public string KeToan { get; set; }
+        [StringLength(500)]
+        public string GhiChu { get; set; }
 
         public int? LoaiGiaoDichID { get; set; }
 

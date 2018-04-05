@@ -13,13 +13,7 @@
 
 }
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#btn-refresh').click(function () {
-            $('#txtSearch').val('');
-        });
-    });
-</script>
+
 <div id="wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -36,7 +30,9 @@
                             {
                                 <input class="form-control" id="txtSearch" name="masp" value="@ViewBag.masp" placeholder="Gõ sản phẩm cần tìm" type="text">
                                 <button type="submit" class="btn btn-info">Tìm kiếm</button>
-                                <button type="submit" id="btn-refresh" class="btn btn-primary">Làm mới</button>
+                                <a rel="#" href="/Admin/HangHoa">
+                                    <input type="button" id="btn-refresh" class="btn btn-primary" value="Làm mới">
+                                </a>
                             }
                         </div>
                     </form>
@@ -59,18 +55,18 @@
                                             @(item.TenHH.Length > 24 ? (item.TenHH.Substring(0, 24) + "...") : item.TenHH)
                                         </a>
                                         <br />
-                                        Mã hàng:<span>@item.MaHH</span><br />
+                                        Mã hàng: <span>@item.MaHH</span><br />
                                         Giá lẻ:<span>
                                             @(item.GiaBanLe.HasValue ? (item.GiaBanLe.Value.ToString("N0") + " VND") : "Liên hệ")
                                         </span><br />
                                         <a href="@Url.Action("Edit", "HangHoa", new { id = item.MaHH })" class="btn btn-info">Chi tiết</a>
 
                                         @Ajax.ActionLink("Xoá", "Delete", new { @id = item.MaHH }, new AjaxOptions
-                                        {
-                                            Confirm = "Bạn có muốn xoá bản ghi này?",
-                                            OnComplete = "$('#row_" + @item.MaHH + "').remove()",
-                                            HttpMethod = "Delete"
-                                        }, new { @class = "btn btn-danger" })
+                                   {
+                                       Confirm = "Bạn có muốn xoá bản ghi này?",
+                                       OnComplete = "$('#row_" + @item.MaHH + "').remove()",
+                                       HttpMethod = "Delete"
+                                   }, new { @class = "btn btn-danger" })
 
                                     </div>
                                 </div>
@@ -88,7 +84,6 @@
             </div>
             <!-- /.panel-body -->
         </div>
-        <!-- /.panel -->
-
+        <!-- /.panel -->      
     </div>
 </div>

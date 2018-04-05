@@ -27,6 +27,10 @@ namespace Models.Dao
             }
             return model.ToPagedList(page, pageSize);
         }
+        public List<HangHoa> ListAll()
+        {
+            return db.HangHoas.OrderBy(x=>x.MaHH).ToList();
+        }
         public HangHoa GetByID(string id)
         {
             return db.HangHoas.Find(id);

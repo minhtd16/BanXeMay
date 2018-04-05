@@ -68,7 +68,7 @@ namespace HTHAplication.Areas.Admin.Controllers
                 var dao = new HangHoaDao();
                 var cauhinhID = new CauHinhIDDao();
                 var chID = cauhinhID.GetValueByID(entity.LoaiMH);
-                string maHH = CommonFunction.GeneratedID(entity.LoaiMH, chID.Value + 1);
+                string maHH = CommonFunction.GenerateMaHang(entity.LoaiMH, chID.Value + 1);
                 entity.MaHH = maHH;
                 entity.SoLuong = 0;
                 entity.Status = true;

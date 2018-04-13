@@ -1473,6 +1473,14 @@
     <Content Include="Areas\Admin\Views\NhapHang\Index.cshtml" />
     <Content Include="Areas\Admin\Views\NhapHang\NhapTuNCC.cshtml" />
     <Content Include="Areas\Admin\Views\NhapHang\_Partial_ThemHang.cshtml" />
+    <Content Include="Areas\Admin\Views\KhachHangGiaoDich\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\KhachHangGiaoDichDaoTM\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\KhachHangGiaoDichDaoTM\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\KhachHangGiaoDichDaoTM\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\KhachHangGiaoDichDaoTM\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\KhachHangGiaoDichDaoTM\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\XuatHang\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\XuatHang\_Partial_ThemHang.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\HTHJavaScript.js" />
     <Content Include="Scripts\i18n\grid.locale-ar.js" />
@@ -1535,7 +1543,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

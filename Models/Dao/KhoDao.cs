@@ -15,15 +15,90 @@ namespace Models.Dao
         {
             db = new HTHApplicationDbContext();
         }
+        public Kho GetByID(int id)
+        {
+            return db.Khoes.Find(id);
+        }
+        public object GetByID(int? id)
+        {
+            throw new NotImplementedException();
+        }
+        public List<Kho> ListAll()
+        {
+            return db.Khoes.Where(x => x.Status == true).OrderByDescending(x => x.ID).ToList();
+        }
         public long Insert(Kho entity)
         {
             db.Khoes.Add(entity);
             db.SaveChanges();
-            return entity.ID;
-        }
-        public List<Kho> ListAll()
+            return entity.ID;           
+        }      
+        public bool Update(Kho entity)
         {
-            return db.Khoes.OrderBy(x => x.ID).ToList();
+            try
+            {
+                var model = db.Khoes.Find(entity.ID);
+                if (model != null)
+                {
+                    //model.DonHangID = entity.DonHangID;
+                    model.Ten = entity.Ten;
+                    model.DiaChi = entity.DiaChi;
+                    model.QuanLyKho = entity.QuanLyKho;
+                    model.SLToiDa = entity.SLToiDa;
+                    db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }    
+        public bool Delete(Kho entity)
+        {
+            try
+            {
+                var model = db.Khoes.Find(entity.ID);
+                if (model != null)
+                {
+                    model.Status = false;
+                    db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
+        //public bool Delete(Kho entity)
+        //{
+        //    try
+        //    {
+        //        var model = db.Khoes.Find(entity.ID);
+        //        if (model != null)
+        //        {
+        //            db.Khoes.Remove(entity);
+        //            db.SaveChanges();
+        //            return true;
+        //        }
+        //        else
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return false;
+        //    }
+        //}
     }
 }

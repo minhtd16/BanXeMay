@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Models.EF.KhachHangGiaoDich>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section header{
+    <li><a href="#">Quản trị khách hàng</a></li>
+    <li class="active"><a href="#">Danh sách Khách hàng</a></li>
+}
+@section jsFooter{
+
+}
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DonHangID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KhachHangID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayGiaoDich)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TongTien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DonHangID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhachHangID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayGiaoDich)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TongTien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrangThai)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

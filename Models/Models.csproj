@@ -64,6 +64,7 @@
     <Compile Include="Dao\GioiTinhDao.cs" />
     <Compile Include="Dao\HangHoaDao.cs" />
     <Compile Include="Dao\KhachHangDao.cs" />
+    <Compile Include="Dao\KhachHangGiaoDichDao.cs" />
     <Compile Include="Dao\KhoDao.cs" />
     <Compile Include="Dao\LoaiKhachHangDao.cs" />
     <Compile Include="Dao\LoaiMatHangDao.cs" />
@@ -103,7 +104,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -21,5 +21,7 @@ namespace Models.EF
         public string QuanLyKho { get; set; }
 
         public int? SLToiDa { get; set; }
+
+        public bool Status { get; set; }
     }
 }

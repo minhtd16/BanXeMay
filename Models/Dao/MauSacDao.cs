@@ -13,6 +13,15 @@ namespace Models.Dao
         {
             db = new HTHApplicationDbContext();
         }
+
+        public MauSac GetByID(int id)
+        {
+            return db.MauSacs.Find(id);
+        }
+        public object GetByID(int? id)
+        {
+            throw new NotImplementedException();
+        }
         public List<MauSac> ListAll()
         {
             return db.MauSacs.OrderBy(x => x.ID).ToList();
@@ -34,5 +43,6 @@ namespace Models.Dao
             ms.Ten = entity.Ten;
             db.SaveChanges();
         }
+
     }
 }

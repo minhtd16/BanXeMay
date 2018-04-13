@@ -9,6 +9,8 @@ namespace HTHAplication.Areas.Admin.Controllers
 {
     public class MauSacController : Controller
     {
+        private HTHApplicationDbContext db = new HTHApplicationDbContext();
+
         // GET: Admin/MauSac
         public ActionResult Index()
         {
@@ -16,12 +18,31 @@ namespace HTHAplication.Areas.Admin.Controllers
             var model = dao.ListAll();
             return View(model);
         }
-        public ActionResult Create(MauSac mausac )
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(MauSac mausac)
         {
             var dao = new MauSacDao();
             dao.Insert(mausac);
             return View();
         }
-
+        public ActionResult Edit(int id)
+        {
+            var dao = new MauSacDao();
+            var model = dao.GetByID(id);
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(MauSac entity)
+        {
+            var dao = new MauSacDao();
+            dao.Edit(entity);          
+            return View(entity);          
+        }
     }
 }

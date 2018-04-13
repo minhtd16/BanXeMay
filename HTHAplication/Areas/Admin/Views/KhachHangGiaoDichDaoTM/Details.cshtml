@@ -1,0 +1,73 @@
+﻿@model Models.EF.KhachHangGiaoDich
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section header{
+    <li><a href="#">Quản trị khách hàng</a></li>
+    <li class="active"><a href="#">Danh sách Khách hàng</a></li>
+}
+@section jsFooter{
+
+}
+<h2>Details</h2>
+
+<div>
+    <h4>KhachHangGiaoDich</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DonHangID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonHangID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KhachHangID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhachHangID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayGiaoDich)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayGiaoDich)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TongTien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TongTien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrangThai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -18,7 +18,7 @@ namespace Models.Dao
         {
             return db.LoaiKhachHangs.OrderBy(x => x.ID).ToList();
         }
-        public LoaiKhachHang GetByID(string id)
+        public LoaiKhachHang GetByID(int id)
         {
             return db.LoaiKhachHangs.Find(id);
         }
@@ -62,7 +62,8 @@ namespace Models.Dao
             {
                 var model = db.LoaiKhachHangs.Find(entity.ID);
                 if (model != null)
-                {                 
+                {
+                    db.LoaiKhachHangs.Remove(entity);
                     db.SaveChanges();
                     return true;
                 }

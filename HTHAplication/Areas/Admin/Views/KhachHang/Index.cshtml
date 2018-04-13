@@ -91,16 +91,13 @@
                                         <th style="font-weight:normal">
                                             @(item.LoaiKH.ToString() == "1" ? "Đại lý" : "Khách lẻ")
                                         </th>
-
                                         <th style="text-align:center; ">
                                             <a href="@Url.Action("Edit", "KhachHang", new { id = item.ID })" class="btn btn-info">Chi tiết</a>
 
                                             @Ajax.ActionLink("Xoá", "Delete", new { @id = item.ID }, new AjaxOptions
-                                       {
-                                           Confirm = "Bạn có muốn xoá bản ghi này?",
-                                           OnComplete = "$('#row_" + @item.ID + "').remove()",
-                                           HttpMethod = "Delete"
-                                       }, new { @class = "btn btn-danger" })
+                                               {Confirm = "Bạn có muốn xoá bản ghi này?",
+                                                   OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                                   HttpMethod = "Delete"}, new { @class = "btn btn-danger" })
                                         </th>
                                     </tr>
                                 }

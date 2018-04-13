@@ -54,7 +54,6 @@ namespace HTHAplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(KhachHang entity)
         {
-
             if (ModelState.IsValid)
             {
                 gTinh();
@@ -69,8 +68,7 @@ namespace HTHAplication.Areas.Admin.Controllers
             }
             else
                 return View(entity);
-        }
-            
+        }            
         public ActionResult Edit(int id)
         {
             var dao = new KhachHangDao();

@@ -22,6 +22,7 @@ namespace Models.EF
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<KhachHangGiaoDich> KhachHangGiaoDiches { get; set; }
         public virtual DbSet<Kho> Khoes { get; set; }
+        public virtual DbSet<KhoHang> KhoHangs { get; set; }
         public virtual DbSet<LoaiGiaoDich> LoaiGiaoDiches { get; set; }
         public virtual DbSet<LoaiKhachHang> LoaiKhachHangs { get; set; }
         public virtual DbSet<LoaiMatHang> LoaiMatHangs { get; set; }
@@ -34,6 +35,7 @@ namespace Models.EF
         public virtual DbSet<PhuongThucThanhToan> PhuongThucThanhToans { get; set; }
         public virtual DbSet<PrinterConfig> PrinterConfigs { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<SystemLog> SystemLogs { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
@@ -65,6 +67,14 @@ namespace Models.EF
                 .Property(e => e.CreateBy)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<ChiTietNhap>()
+                .Property(e => e.ModifiedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ChiTietXuat>()
+                .Property(e => e.XuatID)
+                .IsUnicode(false);
+
             modelBuilder.Entity<ChiTietXuat>()
                 .Property(e => e.MaHH)
                 .IsUnicode(false);
@@ -74,11 +84,15 @@ namespace Models.EF
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<ChiTietXuat>()
-                .Property(e => e.TongTien)
+                .Property(e => e.ThanhTien)
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<ChiTietXuat>()
                 .Property(e => e.CreateBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ChiTietXuat>()
+                .Property(e => e.ModifiedBy)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Credential>()
@@ -88,6 +102,16 @@ namespace Models.EF
             modelBuilder.Entity<Credential>()
                 .Property(e => e.RoleID)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<DonViTinh>()
+                .HasMany(e => e.HangHoas)
+                .WithOptional(e => e.DonViTinh)
+                .HasForeignKey(e => e.DVT);
+
+            modelBuilder.Entity<DonViTinh>()
+                .HasMany(e => e.HangHoas1)
+                .WithOptional(e => e.DonViTinh1)
+                .HasForeignKey(e => e.DVT);
 
             modelBuilder.Entity<HangHoa>()
                 .Property(e => e.MaHH)
@@ -102,12 +126,34 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<HangHoa>()
+                .Property(e => e.GiaNhapVe)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<HangHoa>()
+                .Property(e => e.GiaBanLe)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<HangHoa>()
+                .Property(e => e.GiaBanSi)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<HangHoa>()
                 .Property(e => e.CreateBy)
                 .IsUnicode(false);
 
             modelBuilder.Entity<HangHoa>()
                 .Property(e => e.ModifiedBy)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<HangHoa>()
+                .HasMany(e => e.ChiTietNhaps)
+                .WithRequired(e => e.HangHoa)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<HangHoa>()
+                .HasMany(e => e.ChiTietXuats)
+                .WithRequired(e => e.HangHoa)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<KhachHang>()
                 .Property(e => e.SDT)
@@ -121,6 +167,11 @@ namespace Models.EF
                 .Property(e => e.ModifiedBy)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<KhachHang>()
+                .HasMany(e => e.XuatHangs)
+                .WithOptional(e => e.KhachHang1)
+                .HasForeignKey(e => e.KhachHang);
+
             modelBuilder.Entity<KhachHangGiaoDich>()
                 .Property(e => e.DonHangID)
                 .IsUnicode(false);
@@ -129,9 +180,28 @@ namespace Models.EF
                 .Property(e => e.TongTien)
                 .HasPrecision(18, 0);
 
+            modelBuilder.Entity<Kho>()
+                .HasMany(e => e.KhoHangs)
+                .WithOptional(e => e.Kho)
+                .HasForeignKey(e => e.MaKho);
+
+            modelBuilder.Entity<KhoHang>()
+                .Property(e => e.MaHH)
+                .IsUnicode(false);
+
             modelBuilder.Entity<LoaiMatHang>()
                 .Property(e => e.ID)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<LoaiMatHang>()
+                .HasMany(e => e.HangHoas)
+                .WithOptional(e => e.LoaiMatHang)
+                .HasForeignKey(e => e.LoaiMH);
+
+            modelBuilder.Entity<MauSac>()
+                .HasMany(e => e.HangHoas)
+                .WithOptional(e => e.MauSac)
+                .HasForeignKey(e => e.MauID);
 
             modelBuilder.Entity<NhaCungCap>()
                 .Property(e => e.DiDong)
@@ -165,6 +235,11 @@ namespace Models.EF
                 .Property(e => e.MaSoThue)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<NhaCungCap>()
+                .HasMany(e => e.NhapHangs)
+                .WithOptional(e => e.NhaCungCap)
+                .HasForeignKey(e => e.DoiTac);
+
             modelBuilder.Entity<NhaCungCapGiaoDich>()
                 .Property(e => e.GiaoDichID)
                 .IsUnicode(false);
@@ -189,6 +264,12 @@ namespace Models.EF
                 .Property(e => e.CreateBy)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<NhapHang>()
+                .HasMany(e => e.ChiTietNhaps)
+                .WithRequired(e => e.NhapHang)
+                .HasForeignKey(e => e.NhapID)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<NhapXuatTon>()
                 .Property(e => e.MaHH)
                 .IsUnicode(false);
@@ -196,6 +277,11 @@ namespace Models.EF
             modelBuilder.Entity<NhapXuatTon>()
                 .Property(e => e.CreateBy)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<NuocSanXuat>()
+                .HasMany(e => e.HangHoas)
+                .WithOptional(e => e.NuocSanXuat)
+                .HasForeignKey(e => e.NuocSXID);
 
             modelBuilder.Entity<Role>()
                 .Property(e => e.ID)
@@ -246,12 +332,26 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<XuatHang>()
+                .Property(e => e.IDXuat)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<XuatHang>()
                 .Property(e => e.TongTien)
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<XuatHang>()
                 .Property(e => e.CreateBy)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<XuatHang>()
+                .Property(e => e.ModifiedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<XuatHang>()
+                .HasMany(e => e.ChiTietXuats)
+                .WithRequired(e => e.XuatHang)
+                .HasForeignKey(e => e.XuatID)
+                .WillCascadeOnDelete(false);
         }
     }
 }

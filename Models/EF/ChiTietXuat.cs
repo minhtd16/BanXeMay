@@ -13,7 +13,9 @@ namespace Models.EF
 
         public int? MaKho { get; set; }
 
-        public long XuatID { get; set; }
+        [Required]
+        [StringLength(20)]
+        public string XuatID { get; set; }
 
         [Required]
         [StringLength(20)]
@@ -23,10 +25,7 @@ namespace Models.EF
 
         public decimal? DonGia { get; set; }
 
-        public decimal? TongTien { get; set; }
-
-        [StringLength(200)]
-        public string GhiChu { get; set; }
+        public decimal? ThanhTien { get; set; }
 
         public DateTime? CreatedDate { get; set; }
 
@@ -34,9 +33,12 @@ namespace Models.EF
 
         [StringLength(50)]
         public string CreateBy { get; set; }
+        
+        [StringLength(50)]
+        public string ModifiedBy { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public byte[] ModifiedBy { get; set; }
+        public virtual HangHoa HangHoa { get; set; }
+
+        public virtual XuatHang XuatHang { get; set; }
     }
 }

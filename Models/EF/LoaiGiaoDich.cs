@@ -9,6 +9,7 @@ namespace Models.EF
     [Table("LoaiGiaoDich")]
     public partial class LoaiGiaoDich
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         [StringLength(50)]

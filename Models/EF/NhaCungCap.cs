@@ -9,6 +9,12 @@ namespace Models.EF
     [Table("NhaCungCap")]
     public partial class NhaCungCap
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public NhaCungCap()
+        {
+            NhapHangs = new HashSet<NhapHang>();
+        }
+
         [Key]
         public int MaNCC { get; set; }
 
@@ -51,5 +57,8 @@ namespace Models.EF
         public bool? Status { get; set; }
 
         public double? ChietKhau { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhapHang> NhapHangs { get; set; }
     }
 }

@@ -36,17 +36,17 @@ namespace Models.Dao
         {
             return db.KhachHangs.Find(id);
         }
-        public bool Insert(KhachHang entity)
+        public int Insert(KhachHang entity)
         {
             try
             {
                 db.KhachHangs.Add(entity);
                 db.SaveChanges();
-                return true;
+                return entity.ID;
             }
             catch (Exception)
             {
-                return false;
+                return -1;
             }
         }
         public bool Update(KhachHang entity)

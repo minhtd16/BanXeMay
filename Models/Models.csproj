@@ -60,12 +60,14 @@
   <ItemGroup>
     <Compile Include="Dao\CauHinhIDDao.cs" />
     <Compile Include="Dao\ChiTietNhapDao.cs" />
+    <Compile Include="Dao\ChiTietXuatDao.cs" />
     <Compile Include="Dao\DonViTinhDao.cs" />
     <Compile Include="Dao\GioiTinhDao.cs" />
     <Compile Include="Dao\HangHoaDao.cs" />
     <Compile Include="Dao\KhachHangDao.cs" />
     <Compile Include="Dao\KhachHangGiaoDichDao.cs" />
     <Compile Include="Dao\KhoDao.cs" />
+    <Compile Include="Dao\KhoHangDao.cs" />
     <Compile Include="Dao\LoaiKhachHangDao.cs" />
     <Compile Include="Dao\LoaiMatHangDao.cs" />
     <Compile Include="Dao\MauSacDao.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Dao\NuocSanXuatDao.cs" />
     <Compile Include="Dao\RoleDao.cs" />
     <Compile Include="Dao\UserDao.cs" />
+    <Compile Include="Dao\XuatHangDao.cs" />
     <Compile Include="EF\CauHinhID.cs" />
     <Compile Include="EF\ChiTietNhap.cs" />
     <Compile Include="EF\ChiTietXuat.cs" />
@@ -85,6 +88,7 @@
     <Compile Include="EF\KhachHang.cs" />
     <Compile Include="EF\KhachHangGiaoDich.cs" />
     <Compile Include="EF\Kho.cs" />
+    <Compile Include="EF\KhoHang.cs" />
     <Compile Include="EF\LoaiGiaoDich.cs" />
     <Compile Include="EF\LoaiKhachHang.cs" />
     <Compile Include="EF\LoaiMatHang.cs" />
@@ -97,6 +101,7 @@
     <Compile Include="EF\PhuongThucThanhToan.cs" />
     <Compile Include="EF\PrinterConfig.cs" />
     <Compile Include="EF\Role.cs" />
+    <Compile Include="EF\sysdiagram.cs" />
     <Compile Include="EF\SystemLog.cs" />
     <Compile Include="EF\User.cs" />
     <Compile Include="EF\UserGroup.cs" />

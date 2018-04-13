@@ -9,25 +9,30 @@ namespace Models.EF
     [Table("XuatHang")]
     public partial class XuatHang
     {
-        [Key]
-        public long IDXuat { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public XuatHang()
+        {
+            ChiTietXuats = new HashSet<ChiTietXuat>();
+        }
 
-        public DateTime? NgayNhap { get; set; }
+        [Key]
+        [StringLength(20)]
+        public string IDXuat { get; set; }
+
+        public DateTime? NgayXuat { get; set; }
 
         [StringLength(50)]
         public string NguoiLapPhieu { get; set; }
 
-        [StringLength(50)]
-        public string NguoiNhanHang { get; set; }
+        public int? KhachHang { get; set; }
+
+        public int? LoaiGiaoDichID { get; set; }
 
         [StringLength(50)]
         public string ThuKho { get; set; }
 
-        [StringLength(50)]
-        public string KeToan { get; set; }
-
-        [StringLength(50)]
-        public string TruongDonVi { get; set; }
+        [StringLength(200)]
+        public string DienGiai { get; set; }
 
         public decimal? TongTien { get; set; }
 
@@ -38,7 +43,14 @@ namespace Models.EF
         [StringLength(50)]
         public string CreateBy { get; set; }
 
-        [MaxLength(50)]
-        public byte[] ModifiedBy { get; set; }
+        [StringLength(50)]
+        public string ModifiedBy { get; set; }
+
+        public int? TrangThai { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChiTietXuat> ChiTietXuats { get; set; }
+
+        public virtual KhachHang KhachHang1 { get; set; }
     }
 }

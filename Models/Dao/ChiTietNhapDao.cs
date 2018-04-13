@@ -8,5 +8,16 @@ namespace Models.Dao
 {
     public class ChiTietNhapDao
     {
+        HTHApplicationDbContext db = null;
+        public ChiTietNhapDao()
+        {
+            db = new HTHApplicationDbContext();
+        }
+        public bool Insert(ChiTietNhap entity)
+        {
+            db.ChiTietNhaps.Add(entity);
+            db.SaveChanges();
+            return true;
+        }
     }
 }

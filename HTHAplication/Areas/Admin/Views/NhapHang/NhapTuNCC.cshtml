@@ -10,6 +10,7 @@
     <li class="active"><a href="#">Nhập hàng</a></li>
 
 }
+
 @{
     var dao = new NhaCungCapDao();
     List<NhaCungCap> lst_NCC = dao.GetAll();
@@ -24,8 +25,8 @@
         }).datepicker("setDate", new Date());
         $("#div_ThemHang").dialog({
             autoOpen: false,
-            height: 500,
-            width: 700,
+            height: 400,
+            width: 800,
             modal: true
         });
 
@@ -33,19 +34,27 @@
             $('#div_ThemHang').dialog("open");
         });
         $('#sl_staff').on('change', function () {
-            if ($(this).val() == "-1") {
-                $('#txt_staffName').val('')
-                $('#txt_Address').val('');
-            }
-            else {
-                var li = $('#ul_staff li:nth-child(' + $(this).val() + ')');
-                var x = li.children('input').eq(0).val();
-                var y = li.children('input').eq(1).val();
-                $('#txt_staffName').val(x);
-                $('#txt_Address').val(y);
-            }
+            var li = $('#ul_staff li:nth-child(' + $(this).val() + ')');
+            var x = li.children('input').eq(0).val();
+            var y = li.children('input').eq(1).val();
+            $('#txt_staffName').val(x);
+            $('#txt_Address').val(y);
+
         });
     });
+    function saveClick() {
+        if ($("#sl_staff")[0].selectedIndex == 0) {
+            alert('Vui lòng chọn nhà cung cấp!');
+        } else if ($("#txt_nguoi_giao").val() == '') {
+            alert('Nhập thông tin người giao hàng!');
+        } else if ($("#txt_nguoi_lap_phieu").val() == '') {
+            alert('Nhập thông tin người lập hóa đơn!');
+        }
+        else {
+            var frm_PhieuNhapKho = document.forms["form2"];
+            executeNhapKho(frm_PhieuNhapKho);
+        }
+    }
 </script>
 
 <!-- /.row -->
@@ -55,14 +64,14 @@
             <div class="panel-heading">
                 Nhập hàng từ nhà cung cấp
             </div>
-            <form>
+            <form id="form2" name="form2" method="post" action="">
                 <div class="panel-body">
                     <div class="form-group">
                         <label class="control-label col-md-2">Nhà cung cấp:</label>
                         <div class="col-md-4">
-                            <select name="sl_staff" class="form-control" id="sl_staff" style="width:100%" title="Chọn nhà cung cấp">
-                                <option value="-1"> ----Chọn nhà cung cấp ----</option>
-                                @for (int i = 0; i < lst_NCC.Count(); i++)
+                            <select name="sl_staff" class="selectpicker" id="sl_staff" style="width:100%" title="---Chọn nhà cung cấp---">
+                               
+                                 @for (int i = 0; i < lst_NCC.Count(); i++)
                                 {
                                     <option value="@lst_NCC.ElementAt(i).MaNCC">@lst_NCC.ElementAt(i).CongTy</option>
                                 }
@@ -100,18 +109,18 @@
                         <div class="col-md-2"></div>
                         <label class="control-label col-md-2">Mã chứng từ:</label>
                         <div class="col-md-4">
-                            <input type="text" id="" disabled="disabled" class="form-control" title="Mã chứng từ" value="@Model.chung_tu_nhap.IDNhap" />
+                            <input type="text" id="txt_ctNumber" disabled="disabled" class="form-control" title="Mã chứng từ" value="@Model.chung_tu_nhap.IDNhap" />
                         </div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group">
                         <label class="control-label col-md-2">Người giao hàng:</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" title="Người giao hàng" value="" />
+                            <input type="text" id="txt_nguoi_giao" class="form-control" title="Người giao hàng" value="" />
                         </div>
                         <label class="control-label col-md-2">Người lập hóa đơn:</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" title="Người lập hóa đơn" value="" />
+                            <input type="text" id="txt_nguoi_lap_phieu" class="form-control" title="Người lập hóa đơn" value="" />
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -122,16 +131,16 @@
                         </div>
                     </div>
                     <div class="clearfix"></div>
-
+                    <br />
                     <div class="form-group">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
                             <a id="a_AddValue" rel="" href="#">
                                 <input type="button" class="btn btn-success" name="btn_AddValue" id="btn_AddValue" value="Thêm hàng" />
                             </a>
-                            <input type="button" class="btn btn-primary" value="Lưu trữ" />
+                            <input type="button" class="btn btn-primary" onclick="return saveClick();" value="Xuất hóa đơn" />
                             <a rel="#" href="/Admin/NhapHang/NhapTuNCC">
-                                <input type="button" class="btn btn-info" value="Làm mới" />
+                                <input type="button" class="btn btn-warning" value="Nhập lại" />
                             </a>
                             <a rel="#" href="/Admin/Home">
                                 <input type="button" class="btn btn-danger" value="Thoát" />
@@ -144,44 +153,16 @@
                     <br />
                     <div class="form-group">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Mã hàng</th>
-                                        <th>Tên hàng</th>
-                                        <th>Số lượng</th>
-                                        <th>Đơn giá</th>
-                                        <th>Thành tiền</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
+                            <table id="tb_mat_hang" class="table table-striped table-bordered table-hover">
+                                <tr>
+                                    <th>Mã hàng</th>
+                                    <th>Tên hàng</th>
+                                    <th>Mã kho</th>
+                                    <th>Số lượng</th>
+                                    <th>Đơn giá</th>
+                                    <th>Thành tiền</th>
+                                    <th></th>
+                                </tr>
                             </table>
                         </div>
                         <!-- /.table-responsive -->
@@ -189,9 +170,9 @@
                     </div>
                 </div>
                 <!--div panel-body-->
-            </form>            
+            </form>
         </div>
-    </div>    
+    </div>
 </div>
 <div id="div_ThemHang" title="Thêm hàng hóa" style="display:none;">
     @Html.Partial("_Partial_ThemHang")

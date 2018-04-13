@@ -9,6 +9,12 @@ namespace Models.EF
     [Table("Kho")]
     public partial class Kho
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Kho()
+        {
+            KhoHangs = new HashSet<KhoHang>();
+        }
+
         public int ID { get; set; }
 
         [StringLength(50)]
@@ -21,7 +27,5 @@ namespace Models.EF
         public string QuanLyKho { get; set; }
 
         public int? SLToiDa { get; set; }
-
-        public bool Status { get; set; }
     }
 }

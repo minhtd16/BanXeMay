@@ -29,7 +29,7 @@ namespace Models.Dao
         }
         public List<HangHoa> ListAll()
         {
-            return db.HangHoas.OrderBy(x=>x.MaHH).ToList();
+            return db.HangHoas.OrderBy(x => x.MaHH).ToList();
         }
         public HangHoa GetByID(string id)
         {
@@ -79,7 +79,7 @@ namespace Models.Dao
                     else
                     {
                         model.Anh = entity.Anh;
-                    }                    
+                    }
                     db.SaveChanges();
                     return true;
                 }
@@ -113,6 +113,42 @@ namespace Models.Dao
             {
                 return false;
             }
+        }
+        public bool NhapHang(string id, int so_luong, decimal don_gia, string session)
+        {
+            HangHoa model = db.HangHoas.Find(id);
+            if (model != null)
+            {
+                model.SoLuong += so_luong;
+                model.GiaNhapVe = don_gia;
+                model.ModifiedBy = session;
+                model.ModifiedDate = DateTime.Now;
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        public bool XuatHang(string id, int so_luong, decimal don_gia, string session)
+        {
+            HangHoa model = db.HangHoas.Find(id);
+            if (model != null)
+            {
+                model.SoLuong -= so_luong;
+                model.GiaBanLe = don_gia;
+                model.ModifiedBy = session;
+                model.ModifiedDate = DateTime.Now;
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }

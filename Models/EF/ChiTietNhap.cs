@@ -27,9 +27,6 @@ namespace Models.EF
 
         public int? MaKho { get; set; }
 
-        [StringLength(200)]
-        public string GhiChu { get; set; }
-
         public DateTime? CreatedDate { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
@@ -37,7 +34,11 @@ namespace Models.EF
         [StringLength(50)]
         public string CreateBy { get; set; }
 
-        [MaxLength(50)]
-        public byte[] ModifiedBy { get; set; }
+        [StringLength(50)]
+        public string ModifiedBy { get; set; }
+
+        public virtual HangHoa HangHoa { get; set; }
+
+        public virtual NhapHang NhapHang { get; set; }
     }
 }

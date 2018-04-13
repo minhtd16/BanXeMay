@@ -11,7 +11,17 @@
 @section jsFooter{
 
 }
+<script>
+    $(document).ready(function ()
+    {
+        $("#datepicker").datepicker({
+            dateFormat: 'dd/mm/yy'
+        }).datepicker("setDate", new Date());
+    });
 
+</script>
+<script src="~/Content/themes/redmond/jquery-ui.min.js"></script>
+<link href="~/Content/themes/redmond/jquery-ui.min.css" rel="stylesheet" />
 
 @using (Html.BeginForm())
 {
@@ -64,8 +74,9 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2">Ngày sinh:</label>
                                 <div class="col-md-2">
-                                    @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                                    <input type="text" id="datepicker" class="form-control" title="Ngày sinh"  value="" />
+                                    @*@Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
 
@@ -88,7 +99,8 @@
                             <div class="form-group">
                                 <label  class="control-label col-md-2">Ngày sửa:</label>
                                 <div class="col-md-3">
-                                    @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control", } })
+
+                                    @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                                     @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -104,16 +116,16 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2">Người sửa cuối:</label>
                                 <div class="col-md-2">
-                                    @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                                     @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-offset-1 col-md-1">
-                                    <input type="submit" value="Cập nhật thông tin" class="btn btn-info" />
+                                    <input type="submit" value="Cập nhật" class="btn btn-info" />
                                 </div>
-                                <div class="col-md-offset-1 col-md-1">
-                                    <a href="@Url.Action("Index", "KhachHang")" class="btn btn-success">Quay lại trang trước</a>
+                                <div class="col-md-1">
+                                    <a href="@Url.Action("Index", "KhachHang")" class="btn btn-success">Quay lại</a>
                                     @*@Html.ActionLink("Back to List", "Index")*@
                                 </div>
                             </div>

@@ -45,9 +45,9 @@
                         <table class="table table-striped table-bordered table-hover" id="example"  style="width:50%">
                             <thead>
                                 <tr>
-                                    <th style="text-align:center; vertical-align:middle; width:15%">TT</th>
+                                    <th style="text-align:center; vertical-align:middle; width:10%">TT</th>
                                     <th style="vertical-align:middle;">Tên màu sắc</th>                                   
-                                    <th style="text-align:center; vertical-align:middle;  width:35%;">Quản trị</th>
+                                    <th style="text-align:center; vertical-align:middle;  width:30%;">Quản trị</th>
                                 </tr>
                             </thead>
                             <tbody style="font-weight:normal">
@@ -85,34 +85,3 @@
     </div>
 </div>
 
-
-
-
-
-@*@section header{}
-<h3>Danh sách các loại màu sắc</h3>
-<p>
-    <a href="@Url.Action("Create", "MauSac")" class="btn btn-success">Thêm mới</a>
-</p>
-<table class="table">
-    <tr>
-        <th>
-           Tên
-        </th>
-        <th>Hành động</th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ten)
-        </td>
-        <td>
-
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |            
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
-</table>*@

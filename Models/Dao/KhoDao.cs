@@ -29,6 +29,7 @@ namespace Models.Dao
         }
         public long Insert(Kho entity)
         {
+            entity.Status = true;
             db.Khoes.Add(entity);
             db.SaveChanges();
             return entity.ID;           

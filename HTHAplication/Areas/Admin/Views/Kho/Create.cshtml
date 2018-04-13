@@ -5,13 +5,15 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 @section header{
+    <li><a href="#">Quản trị kho hàng</a></li>
+    <li class="active"><a href="#">Thêm kho</a></li>
 }
 <div id="wrapper">
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Thêm mới kho hàng
+                    Thêm kho hàng
                 </div>
                 <!-- /.panel-heading -->
                 <br />
@@ -52,10 +54,10 @@
                      
                         <div class="form-group">
                             <div class="col-md-offset-1 col-md-1">
-                                <input type="submit" value="Thêm mới kho" class="btn btn-primary" />
+                                <input type="submit" value="Thêm mới" class="btn btn-primary" />
                             </div>
-                            <div class="col-md-offset-1 col-md-1">
-                                <a href="@Url.Action("Index", "Kho")" class="btn btn-success">Quay lại trang trước</a>
+                            <div class="col-md-2">
+                                <a href="@Url.Action("Index", "Kho")" class="btn btn-success">Hủy bỏ</a>
                             </div>
                         </div>
                     </div>

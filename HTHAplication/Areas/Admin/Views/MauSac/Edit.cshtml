@@ -1,19 +1,19 @@
 ﻿@model Models.EF.MauSac
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 @section header{
     <li><a href="#">Quản trị màu sắc hàng</a></li>
-    <li class="active"><a href="#">Thêm mới màu sắc</a></li>
+    <li class="active"><a href="#">Cập nhật màu sắc hàng hóa</a></li>
 }
 <div id="wrapper">
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Thêm mới màu sắc hàng
+                    Chi tiết kho hàng
                 </div>
                 <!-- /.panel-heading -->
                 <br />
@@ -23,15 +23,16 @@
                     <div class="form-horizontal">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
-                            <label class="control-label col-md-2">Tên màu sắc:</label>
+                            <label class="control-label col-md-2">Tên màu:</label>
                             <div class="col-md-2">
                                 @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                   
                         <div class="form-group">
-                            <div class="col-md-offset-1 col-md-1">
-                                <input type="submit" value="Thêm mới" class="btn btn-primary" />
+                            <div class="col-md-offset-2 col-md-1">
+                                <input type="submit" value="Cập nhật" class="btn btn-primary" />
                             </div>
                             <div class="col-md-1">
                                 <a href="@Url.Action("Index", "MauSac")" class="btn btn-success">Hủy bỏ</a>
@@ -43,34 +44,3 @@
         </div>
     </div>
 </div>
-
-@*@section header{}
-    <h2>Create</h2>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>Màu sắc</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Ten, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Thêm mới" class="btn btn-success" />
-                </div>
-            </div>
-        </div>
-    }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>*@

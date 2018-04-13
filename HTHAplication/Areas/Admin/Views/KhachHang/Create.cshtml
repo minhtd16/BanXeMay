@@ -18,7 +18,10 @@
             dateFormat: 'dd/mm/yy'
         }).datepicker("setDate", new Date());    
     });
+  
 </script>
+<script src="~/Content/themes/redmond/jquery-ui.min.js"></script>
+<link href="~/Content/themes/redmond/jquery-ui.min.css" rel="stylesheet" />
 <div id="wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -67,9 +70,10 @@
                         <div class="form-group">
                             <label class="control-label col-md-2">Ngày sinh:</label>
                             <div class="col-md-2">
+                                <input type="text" id="datepicker" class="form-control" value="" />
                                 @*<input type="text" id="datepicker" class="form-control" title="Ngày giao dịch" value="" />*@
-                                @Html.EditorFor(x => x.NgaySinh, new { htmlAttributes = new { @class = "form-control", @textmode = "date" } })                           
-                                @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                                @*@Html.EditorFor(x => x.NgaySinh, new { htmlAttributes = new { @class = "form-control", @textmode = "date" } })                           
+                                @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
 
@@ -89,9 +93,9 @@
                         </div>*@
                         <div class="form-group">
                             <div class="col-md-offset-1 col-md-1">
-                                <input type="submit" value="Thêm mới khách hàng" class="btn btn-info" />
+                                <input type="submit" value="Thêm mới" class="btn btn-info" />
                             </div>
-                            <div class="col-md-offset-1 col-md-1">
+                            <div class="col-md-1">
                                 <a href="@Url.Action("Index", "KhachHang")" class="btn btn-success">Quay lại trang trước</a>                               
                             </div>
                         </div>

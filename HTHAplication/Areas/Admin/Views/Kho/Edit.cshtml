@@ -5,6 +5,8 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 @section header{
+<li><a href="#">Quản trị kho hàng</a></li>
+<li class="active"><a href="#">Cập nhật kho</a></li>
 }
 <div id="wrapper">
     <div class="row">
@@ -54,7 +56,7 @@
                             <div class="col-md-offset-1 col-md-1">
                                 <input type="submit" value="Cập nhật thông tin kho" class="btn btn-primary" />
                             </div>
-                            <div class="col-md-offset-1 col-md-1">
+                            <div class="col-md-1">
                                 <a href="@Url.Action("Index", "Kho")" class="btn btn-success">Quay lại</a>
                             </div>
                         </div>

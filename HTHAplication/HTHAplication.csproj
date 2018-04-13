@@ -1481,6 +1481,10 @@
     <Content Include="Areas\Admin\Views\KhachHangGiaoDichDaoTM\Index.cshtml" />
     <Content Include="Areas\Admin\Views\XuatHang\Index.cshtml" />
     <Content Include="Areas\Admin\Views\XuatHang\_Partial_ThemHang.cshtml" />
+    <Content Include="Areas\Admin\Views\Kho\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Kho\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Kho\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\MauSac\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\HTHJavaScript.js" />
     <Content Include="Scripts\i18n\grid.locale-ar.js" />

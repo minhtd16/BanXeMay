@@ -24,15 +24,37 @@ namespace Models.Dao
         }
         public List<MauSac> ListAll()
         {
-            return db.MauSacs.OrderBy(x => x.ID).ToList();
+            return db.MauSacs.Where(x => x.Status == true).OrderBy(x => x.ID).ToList();
         }
         public int Insert(MauSac entity)
         {
+            entity.Status = true;
             db.MauSacs.Add(entity);
             db.SaveChanges();
             return entity.ID;
         }
-        public void Delete(MauSac entity)
+        public bool Delete(MauSac entity)
+        {
+            try
+            {
+                var model = db.MauSacs.Find(entity.ID);
+                if (model != null)
+                {
+                    model.Status = false;
+                    db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public void Delete_x(MauSac entity)
         {
             db.MauSacs.Remove(entity);
             db.SaveChanges();

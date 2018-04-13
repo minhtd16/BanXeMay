@@ -30,11 +30,11 @@ namespace HTHAplication.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Kho kho)
+        public ActionResult Create(Kho entity)
         {
             var dao = new KhoDao();
-            dao.Insert(kho);
-            return View();
+            dao.Insert(entity);
+            return RedirectToAction("Index");
         }
 
         // GET: Admin/Khoes/Edit/5

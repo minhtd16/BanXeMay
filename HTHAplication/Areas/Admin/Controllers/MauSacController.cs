@@ -24,11 +24,11 @@ namespace HTHAplication.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(MauSac mausac)
+        public ActionResult Create(MauSac entity)
         {
             var dao = new MauSacDao();
-            dao.Insert(mausac);
-            return View();
+            dao.Insert(entity);
+            return RedirectToAction("Index");
         }
         public ActionResult Edit(int id)
         {
@@ -43,6 +43,17 @@ namespace HTHAplication.Areas.Admin.Controllers
             var dao = new MauSacDao();
             dao.Edit(entity);          
             return View(entity);          
+        }
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            var dao = new MauSacDao();
+            var model = dao.GetByID(id);
+            if (model != null)
+            {
+                dao.Delete(model);
+            }
+            return RedirectToAction("Index");
         }
     }
 }

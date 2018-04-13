@@ -9,6 +9,12 @@ namespace Models.EF
     [Table("KhachHang")]
     public partial class KhachHang
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public KhachHang()
+        {
+            XuatHangs = new HashSet<XuatHang>();
+        }
+
         public int ID { get; set; }
 
         [StringLength(50)]
@@ -38,5 +44,8 @@ namespace Models.EF
         public string ModifiedBy { get; set; }
 
         public bool? Status { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<XuatHang> XuatHangs { get; set; }
     }
 }

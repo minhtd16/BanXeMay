@@ -15,9 +15,19 @@ namespace Models.Dao
             db = new HTHApplicationDbContext();
         }
 
-        //public List<NhapHang> ListAll()
-        //{
-        //    return db.NhapHangs.Á(x => x.CreatedDate).ToList();
-        //}
+        public List<NhapHang> ListAll()
+        {
+            return db.NhapHangs.OrderBy(x => x.IDNhap).ToList();
+        }
+        public bool Insert(NhapHang entity)
+        {
+            db.NhapHangs.Add(entity);
+            db.SaveChanges();
+            return true;
+        }
+        public NhapHang GetById(string idNhap)
+        {
+            return db.NhapHangs.Find(idNhap);
+        }
     }
 }

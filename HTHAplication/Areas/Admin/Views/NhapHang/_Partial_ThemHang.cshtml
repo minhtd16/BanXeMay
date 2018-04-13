@@ -18,33 +18,104 @@
 @using Models.Dao;
 @using Models.EF;
 @{
-    var dao = new HangHoaDao();
-    List<HangHoa> lst_MH = dao.ListAll();
+    var daoH = new HangHoaDao();
+    var daoK = new KhoDao();
+    List<HangHoa> lst_MH = daoH.ListAll();
+    List<Kho> lst_Kho = daoK.ListAll();
 }
 <link href="~/Assets/Admin/js/selector/bootstrap-select.min.css" rel="stylesheet" />
 <script src="~/Assets/Admin/js/selector/bootstrap-select.min.js"></script>
-<script src="~/Assets/Admin/js/selector/i18n/defaults-*.js"></script>
 <script>
     $(document).ready(function () {
         $('.selectpicker').selectpicker({
             liveSearch: true,
             showSubtext: true
         });
+        $('#sl, #dg').keyup(function (event) {
+            if (event.which >= 37 && event.which <= 40) return;
+            this.value = this.value.replace(/\D/g, '')
+                                   .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        });
+        $('#btnSubmit').click(function () {
+            $("#sl").val($("#sl").val().replace(/,/g, ''));
+            $("#dg").val($("#dg").val().replace(/,/g, ''));
+        });
     });
+
+
 </script>
-<div class="form-group">
-    <form id="frm_ThemHang" name="frm_ThemHang" method="post" action="#">
-        <div class="label"><label for="ma_mh">Mã mặt hàng</label></div>
-        <div>
-            <select id="ma_mh" name="ma_mh" class="selectpicker" data-live-search="true" title="Chọn mặt hàng">
-                <option data-hidden="true">Chọn mặt hàng</option>
-                @for (int i = 0; i < lst_MH.Count(); i++)
-                {
-                    <option data-subtext="|Hiện còn:@lst_MH.ElementAt(i).SoLuong" value="@lst_MH.ElementAt(i).MaHH">@lst_MH.ElementAt(i).MaHH</option>
-                }
-            </select>
-        </div>
+<div class="row">
+    <div class="col-md-12">
+        <form id="frm_ThemHang" name="frm_ThemHang" method="post" action="#" onsubmit="return themMatHang(this);">
+            <table>
+                <tr>
+                    <td>Mã mặt hàng:</td>
+                    <td>
+                        <select required id="ma_mh" name="ma_mh" class="selectpicker" data-live-search="true" title="Chọn mặt hàng" onchange="return changeMMH(this);">
+                            <option data-hidden="true">Chọn mặt hàng</option>
+                            @for (int i = 0; i < lst_MH.Count(); i++)
+                            {
+                                <option data-subtext="|Hiện còn:@lst_MH.ElementAt(i).SoLuong" value="@lst_MH.ElementAt(i).MaHH">@lst_MH.ElementAt(i).MaHH</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        Tên hàng:
+                    </td>
+                    <td width="250px">
+                        <input type="text" id="ten_mh" name="ten_mh" disabled="disabled" title="Tên hàng" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Chọn kho lưu:</td>
+                    <td>
+                        <select required id="kho_hang" name="kho_mh" class="selectpicker" title="Chọn kho lưu trữ">
+                            <option data-hidden="true">Chọn kho lưu</option>
+                            @for (int i = 0; i < lst_Kho.Count(); i++)
+                            {
+                                <option value="@lst_Kho.ElementAt(i).ID">@lst_Kho.ElementAt(i).Ten</option>
+                            }
+                        </select>
+                    </td>
+                    <td>Đơn vị tính:</td>
+                    <td>
+                        <input  id="dvt" disabled="disabled" title="Đơn vị tính" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Số lượng:</td>
+                    <td>
+                        <input required  class="form-control" type="text" id="sl" name="sl" value="1" placeholder="Nhập số lượng" />
+                    </td>
+                    <td>
+                        Giá nhập (VNĐ):
+                    </td>
+                    <td>
+                        <input required class="form-control" type="text" id="dg" name="dg" value="0" placeholder="Nhập đơn giá" />
+                    </td>
+                </tr>
 
+                <tr>
+                    <td colspan="4" height="5px;"></td>
+                </tr>
+                <tr>
 
-    </form>
+                    <td colspan="4" align="center">
+                        <input type="submit" id="btnSubmit" class="btn btn-success" value="Thêm" />
+                        <input type="reset" class="btn btn-info" value="Nhập lại" />
+                    </td>
+
+                </tr>
+            </table>
+        </form>
+    </div>
 </div>
+<ul id="ul_mh" style="display:none;">
+    @for (int i = 0; i < lst_MH.Count(); i++)
+    {
+        <li>
+            <input type="text" name="ip_ten_mh" value="@lst_MH.ElementAt(i).TenHH" />
+            <input type="text" name="ip_dvt" value="@lst_MH.ElementAt(i).DonViTinh.Ten" />
+        </li>
+    }
+</ul>

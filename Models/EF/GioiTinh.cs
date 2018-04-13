@@ -11,7 +11,7 @@ namespace Models.EF
     {
         public byte iD { get; set; }
 
-        [StringLength(10)]
+        [StringLength(5)]
         public string tenGT { get; set; }
     }
 }

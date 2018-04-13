@@ -3511,7 +3511,7 @@ select[multiple].form-group-lg .form-control, textarea.form-group-lg .form-contr
 
     .btn-warning.active, .btn-warning.focus, .btn-warning:active, .btn-warning:focus, .btn-warning:hover, .open > .dropdown-toggle.btn-warning {
         color: #fff;
-        background-color: #FFF;
+        background-color: #ed971e;
         border-color: #d58512;
     }
 
@@ -3526,7 +3526,7 @@ select[multiple].form-group-lg .form-control, textarea.form-group-lg .form-contr
 
     .btn-warning .badge {
         color: #f0ad4e;
-        background-color: #fff;
+        background-color: #f7ad45;
     }
 
 .btn-danger {

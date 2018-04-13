@@ -9,6 +9,14 @@ namespace Models.EF
     [Table("HangHoa")]
     public partial class HangHoa
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HangHoa()
+        {
+            ChiTietNhaps = new HashSet<ChiTietNhap>();
+            ChiTietXuats = new HashSet<ChiTietXuat>();
+            KhoHangs = new HashSet<KhoHang>();
+        }
+
         [Key]
         [StringLength(20)]
         public string MaHH { get; set; }
@@ -40,15 +48,15 @@ namespace Models.EF
         [StringLength(500)]
         public string ThongTin { get; set; }
 
-        public long? GiaNhapVe { get; set; }
+        public decimal? GiaNhapVe { get; set; }
 
-        public long? GiaBanLe { get; set; }
+        public decimal? GiaBanLe { get; set; }
 
-        public long? GiaBanSi { get; set; }
+        public decimal? GiaBanSi { get; set; }
 
         public double? ThueSuat { get; set; }
 
-        public bool TinhTonKho { get; set; }
+        public bool? TinhTonKho { get; set; }
 
         public DateTime? CreatedDate { get; set; }
 
@@ -61,5 +69,24 @@ namespace Models.EF
         public string ModifiedBy { get; set; }
 
         public bool? Status { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChiTietNhap> ChiTietNhaps { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChiTietXuat> ChiTietXuats { get; set; }
+
+        public virtual DonViTinh DonViTinh { get; set; }
+
+        public virtual DonViTinh DonViTinh1 { get; set; }
+
+        public virtual LoaiMatHang LoaiMatHang { get; set; }
+
+        public virtual MauSac MauSac { get; set; }
+
+        public virtual NuocSanXuat NuocSanXuat { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhoHang> KhoHangs { get; set; }
     }
 }
